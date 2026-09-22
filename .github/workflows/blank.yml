@@ -30,6 +30,16 @@ jobs:
       - name: run main Python
         run: python main.py
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v7
+        with:
+          context: . # Usa a pasta atual para procurar o Dockerfile
+          push: false # Garante que NÃO vai tentar enviar para o Docker Hub
+          tags: teste-local:latest # Nome genérico só para a máquina conseguir construir
+
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
